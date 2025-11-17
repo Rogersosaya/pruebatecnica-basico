@@ -1,5 +1,6 @@
 import { Book } from "@/types/book";
 
+// Envuelve la llamada a Gutendex y normaliza la respuesta
 export async function getBooks(page: number = 1){
   try {
     const res = await fetch(`https://gutendex.com/books/?page=${page}`);
@@ -10,6 +11,7 @@ export async function getBooks(page: number = 1){
     };
 
   } catch (error: any) {
+    // Toda falla se transforma en un objeto con mensaje estándar
     return {
       ok: false,
       message: error?.message || "Error desconocido",

@@ -1,5 +1,6 @@
 import BooksList from "@/components/BooksList";
 
+// Página principal que envuelve la lista en un layout responsivo
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
@@ -11,6 +12,7 @@ export default function HomePage() {
        
         </div>
         <div className="bg-white rounded-lg shadow-lg p-8">
+          {/* Lista dinámica obtenida desde la API de Gutendex */}
           <BooksList />
         </div>
       </div>

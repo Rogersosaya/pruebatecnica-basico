@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Book } from "@/types/book";
 import { getBooks } from "@/lib/api";
 
-const MAX_BOOKS = 10;
+const MAX_BOOKS = 10; // Limita la cantidad mostrada para mantener el listado breve
 
 export default function BooksList() {
   const [books, setBooks] = useState<Book[]>([]);
@@ -17,6 +17,7 @@ export default function BooksList() {
       setLoading(true);
       setError(null);
 
+      // Se solicita la primera página de Gutendex
       const response = await getBooks(1);
 
       if (!response.ok) {
@@ -30,9 +31,11 @@ export default function BooksList() {
       setLoading(false);
     }
 
+    // Se dispara una sola vez al montar el componente
     loadBooks();
   }, []);
 
+  // Mensaje temporal mientras llega la respuesta
   if (loading) {
     return (
       <div className="flex justify-center items-center py-8">
@@ -41,6 +44,7 @@ export default function BooksList() {
     );
   }
 
+  // Feedback específico cuando la API falla
   if (error) {
     return (
       <div className="bg-red-50 border border-red-200 rounded-md p-4">
@@ -50,6 +54,7 @@ export default function BooksList() {
     );
   }
 
+  // Estado vacío cuando no hay resultados válidos
   if (books.length === 0) {
     return (
       <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
@@ -59,6 +64,7 @@ export default function BooksList() {
   }
 
   return (
+    // Renderiza cada libro con su autor principal
     <ul className="space-y-4">
       {books.map((book) => (
         <li
